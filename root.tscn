@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca7yalqkns62f"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_5mo5f"]
+[ext_resource type="Texture2D" uid="uid://thpp82inlcev" path="res://icon.svg" id="2_xjpcg"]
+[ext_resource type="Script" path="res://world.gd" id="3_fk41n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00bnm"]
+size = Vector2(64, 64)
+
+[node name="Root" type="Node2D"]
+
+[node name="WorldUpdate" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("3_fk41n")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_5mo5f")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Icon" type="Sprite2D" parent="Player"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_xjpcg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_00bnm")
+
+[connection signal="timeout" from="WorldUpdate" to="World" method="_on_world_update_timeout"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://djftqg6jxlshj"]
+
+[ext_resource type="Texture2D" uid="uid://thpp82inlcev" path="res://icon.svg" id="1_ejelv"]
+[ext_resource type="Script" path="res://chunk.gd" id="1_s1tle"]
+
+[node name="Chunk" type="Node2D"]
+script = ExtResource("1_s1tle")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.31, 0.31)
+texture = ExtResource("1_ejelv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
